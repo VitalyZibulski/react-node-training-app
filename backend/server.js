@@ -12,6 +12,7 @@ import {errorHandler, notFound} from "./middleware/errorMiddleware.js";
 /* Routes */
 import userRoutes from './routes/userRoutes.js';
 import exerciseRoutes from './routes/exerciseRoutes.js';
+import trainingRoutes from './routes/trainingRoutes.js';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(express.json())
 
 app.use('/api/users', userRoutes);
 app.use('/api/exercises', exerciseRoutes);
+app.use('/api/trainings', trainingRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
