@@ -15,7 +15,7 @@ const trainingLogSchema = mongoose.Schema({
   },
   completed: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 }, {
   minimize: false,

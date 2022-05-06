@@ -1,17 +1,66 @@
 import expressAsyncHandler from "express-async-handler";
 import Exercise from "../../models/exerciseModel.js";
 
-// @desc    Add new exercise
+// @desc    Create new exercise
 // @route   POST /api/exercises
 // @access  Private
-export const addNewExercise = expressAsyncHandler(async(req, res) => {
-  const {name, times, imageId} = req.body();
+export const createNewExercise = expressAsyncHandler(async(req, res) => {
+  const {name, times, imageIndex} = req.body;
 
   const exercise = await Exercise.create({
     name,
     times,
-    imageId
+    imageIdx: imageIndex
   });
 
   res.json(exercise);
+});
+
+// @desc    Update exercise
+// @route   PUT /api/trainings
+// @access  Private
+export const updateExercise = expressAsyncHandler(async(req, res) => {
+  const {name, times, imageIndex, exerciseId} = req.body;
+  let exercise = await Exercise.findById(exerciseId);
+
+  if (!exercise) {
+    res.status(404);
+    throw new Error('Exercise does not exist');
+  };
+
+  exercise.name = name;
+  exercise.times = times;
+  exercise.imageIdx = imageIndex;
+
+  const updatedTraining = await exercise.save()
+
+  res.json(updatedTraining);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @desc    Get exercise
+// @route   Get /api/exercises/:id
+// @access  Private
+// export const addNewExerciseLog = expressAsyncHandler(async(req, res) => {
+//   const {exerciseId, times, imageId} = req.body();
+//
+//   const exercise = await Exercise.create({
+//     name,
+//     times,
+//     imageId
+//   });
+//
+//   res.json(exercise);
+// })
