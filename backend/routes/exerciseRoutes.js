@@ -6,11 +6,13 @@ import {getExerciseLog} from "../controllers/exercise/exerciseLogController.js";
 import {updateExerciseLog} from "../controllers/exercise/exerciseLogController.js";
 import {updateCompleteExerciseLog} from "../controllers/exercise/exerciseLogController.js";
 import {updateExercise} from "../controllers/exercise/exerciseController.js";
+import {deleteExercise} from "../controllers/exercise/exerciseController.js";
 
 const router = express.Router();
 
 router.route('/').post(protect, createNewExercise)
-                 .put(protect, updateExercise);
+                 .put(protect, updateExercise)
+                 .delete(protect, deleteExercise)
 router.route('/log')
   .post(protect, createNewExerciseLog)
   .put(protect, updateExerciseLog);

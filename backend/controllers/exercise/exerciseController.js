@@ -37,6 +37,23 @@ export const updateExercise = expressAsyncHandler(async(req, res) => {
   res.json(updatedTraining);
 })
 
+// @desc    Delete exercise
+// @route   DELETE /api/exercises
+// @access  Private
+export const deleteExercise = expressAsyncHandler(async(req, res) => {
+  const {exerciseId} = req.body;
+  let exercise = await Exercise.findById(exerciseId);
+
+  if (!exercise) {
+    res.status(404);
+    throw new Error('Exercise does not exist');
+  };
+
+  await exercise.remove();
+
+  res.json({message: 'Exercise was deleted'});
+});
+
 
 
 
