@@ -7,10 +7,12 @@ import {updateExerciseLog} from "../controllers/exercise/exerciseLogController.j
 import {updateCompleteExerciseLog} from "../controllers/exercise/exerciseLogController.js";
 import {updateExercise} from "../controllers/exercise/exerciseController.js";
 import {deleteExercise} from "../controllers/exercise/exerciseController.js";
+import {getExercises} from "../controllers/exercise/exerciseController.js";
 
 const router = express.Router();
 
-router.route('/').post(protect, createNewExercise)
+router.route('/').get(protect, getExercises)
+                 .post(protect, createNewExercise)
                  .put(protect, updateExercise)
                  .delete(protect, deleteExercise)
 router.route('/log')

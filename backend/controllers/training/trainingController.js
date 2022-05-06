@@ -18,6 +18,15 @@ export const createNewTraining = expressAsyncHandler(async(req, res) => {
 // @desc    Get training
 // @route   GET /api/trainings/:id
 // @access  Private
+export const getTrainings = expressAsyncHandler(async(req, res) => {
+  const trainings = await Training.find({}).populate('exercises');
+
+  res.json(trainings);
+})
+
+// @desc    Get training
+// @route   GET /api/trainings/:id
+// @access  Private
 export const getTraining = expressAsyncHandler(async(req, res) => {
   const training = await Training.findById(req.params.id)
                                   .populate('exercises') // show all info object id

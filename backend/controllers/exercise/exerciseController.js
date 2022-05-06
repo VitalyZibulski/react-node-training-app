@@ -1,6 +1,15 @@
 import expressAsyncHandler from "express-async-handler";
 import Exercise from "../../models/exerciseModel.js";
 
+// @desc    Get exercises
+// @route   GET /api/exercises
+// @access  Private
+export const getExercises = expressAsyncHandler(async(req, res) => {
+  const exercises = await Exercise.find({});
+
+  res.json(exercises);
+})
+
 // @desc    Create new exercise
 // @route   POST /api/exercises
 // @access  Private

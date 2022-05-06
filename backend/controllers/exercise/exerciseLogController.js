@@ -69,7 +69,7 @@ export const updateExerciseLog = expressAsyncHandler(async(req, res) => {
 
   let newTimes = currentLog.times;
 
-  if (!timeIndex || !key || !value) {
+  if ((!timeIndex || timeIndex !== 0) || !key || (!value && value !== false)) {
     res.status(404);
     throw new Error('All fields are required');
   }
@@ -88,7 +88,8 @@ export const updateExerciseLog = expressAsyncHandler(async(req, res) => {
 // @access  Private
 export const updateCompleteExerciseLog = expressAsyncHandler(async(req, res) => {
   const {logId, completed} = req.body;
-  let currentLog = await ExerciseLog.findById(logId);
+  let currentLog = await ExerciseLog.findById(logId)
+                                    .populate('exercise', 'training');
 
   if (!currentLog) {
     res.status(404);
